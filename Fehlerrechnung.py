@@ -21,7 +21,6 @@ class SymbolicDerivatives:
         for variable in self.variables:
             f_prime = self.f.diff(variable)
             self.derivatives[str(variable)] = f_prime
-        print(self.derivatives)
 
     def substitute(self, values):
         derivatives_sub = []
@@ -39,9 +38,7 @@ class SymbolicDerivatives:
         return " + ".join(derivatives_sub)
 
     def latex_output(self, values):
-        print('a')
         latex_str = "\\begin{align*}\n"
-        print('b')
         latex_str += (
             "&= \\Delta "
             + " + \\Delta ".join(
@@ -52,9 +49,7 @@ class SymbolicDerivatives:
             )
             + "\\\\\n"
         )
-        print('c')
         substituted_str = self.substitute(values)
-        print('d')
         for value in values.values():
             if value[0] == 0.0:
                 continue
