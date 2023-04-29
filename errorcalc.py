@@ -3,7 +3,24 @@ import sympy as sym
 
 
 class Error:
+    """ Perform a error estimation of given function
+    and corresponding errors for the variables. """
+
     def __init__(self, func: callable):
+        """ Constructer for the Error instance.
+        Parameters
+        ----------
+            func: callable
+                Func (e.g. a physical Law) is the function, 
+                to which the error estimation is to be calculated.
+                The Arguments used in func are automatticlay extraced using
+                the inspect library.
+        
+        Returns
+        ------
+            Error Instance
+
+        """
         # Get the arguments of the function
         arg_names = inspect.getfullargspec(func).args
         # Define the variables as regular Python variables
@@ -36,7 +53,7 @@ class Error:
             derivatives_sub.append(derivative_str)
         return " + ".join(derivatives_sub)
 
-    def latex_out(self, values):
+    def latex_out(self, values: dict):
         latex_str = "\\begin{align*}\n"
         latex_str += (
             "    &= \\Delta "
@@ -72,7 +89,7 @@ class Error:
         latex_str += f"    &= \\SI{{{float(result)}}}{{}}\n"
         latex_str += "\\end{align*}\n\n"
         return latex_str
-    def result(self, values):
+    def result(self, values: dict):
         result = sum(
             [
                 values[delta_name][0]
