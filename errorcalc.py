@@ -3,7 +3,7 @@ import sympy as sym
 
 
 class Error:
-    def __init__(self, func):
+    def __init__(self, func: callable):
         # Get the arguments of the function
         arg_names = inspect.getfullargspec(func).args
         # Define the variables as regular Python variables
@@ -21,7 +21,7 @@ class Error:
             f_prime = self.f.diff(variable)
             self.derivatives[str(variable)] = f_prime
 
-    def substitute(self, values):
+    def substitute(self, values: dict):
         derivatives_sub = []
         for variable in self.variables:
             # Get the variable name as a string
