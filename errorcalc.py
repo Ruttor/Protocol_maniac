@@ -2,7 +2,7 @@ import inspect
 import sympy as sym
 
 
-class error:
+class Error:
     def __init__(self, func):
         # Get the arguments of the function
         arg_names = inspect.getfullargspec(func).args
